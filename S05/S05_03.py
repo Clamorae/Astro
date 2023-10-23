@@ -13,14 +13,14 @@ data_y = np.array([])
 with open ("data", 'r') as f :
     for line in f:
         (x_buf, y_buf) = line.split()
-        np.append(data_x,float(x_buf))
-        np.append(data_y,float(y_buf))
+        data_x = np.append(data_x,float(x_buf))
+        data_y = np.append(data_y,float(y_buf))
 
 def residual(param, x, y):
     residue = param[0]*x + param[1]-y
     return residue
 
-param0 = [1, 12]
+param0 = np.array([1, 12])
 
 least = sp.optimize.least_squares(residual, param0, args = (data_x, data_y))
 
