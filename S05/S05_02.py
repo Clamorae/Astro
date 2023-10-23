@@ -1,6 +1,5 @@
 import scipy as sp
-
-#TODO Print the curve
+import matplotlib as plt
 
 def curve(x):
     y = -x**(1/x)
@@ -8,4 +7,4 @@ def curve(x):
 
 min = sp.optimize.minimize_scalar(curve, method = 'brent')
 
-print(min)
+print(f"the minimum of the function is {min.fun} at x = {min.x}")
