@@ -1,0 +1,22 @@
+#
+# data file name : q08b.data
+#
+#  description of columns of this data file
+#
+#   1st column : item name
+#   2nd column : unit price
+#   3rd column : quantity
+#
+carrot       20     5
+cucumber     10     3
+corn         15     7
+asparagus     7    10
+garlic        5    15
+tomato       12     8
+potato       18    12
+leek          8     5
+eggplant     13     6
+pumpkin      25     2
+ginger       16     4
+onion        22     3
+spinach      30     1
