@@ -17,7 +17,6 @@ with open("./Astro/S09/dataQ2.txt","r") as f:
 
 for line in lines:
     if "#" not in line:
-        #print(line)
         splitted = line.split()
         try:
             ra_rad = float(splitted[8])
@@ -25,23 +24,11 @@ for line in lines:
             continue
         dec_rad = float(splitted[10])
 
-        #coordinate = coord.SkyCoord(ha,deg,unit=(u_ha,u_deg))
-
-        # ra_rad = coordinate.ra.radian
-        # dec_rad = coordinate.dec.radian
-
-        #l_rad = coordinate.galactic.l.radian
-        #b_rad = coordinate.galactic.b.radian
-
         if ra_rad > np.pi:
             ra_rad -= 2.0 * np.pi
-        # if l_rad > np.pi:
-        #     l_rad -= 2.0 * np.pi
 
         data_ra = np.append(data_ra, ra_rad)
         data_dec = np.append(data_dec, dec_rad)
-        # data_l = np.append(data_l, l_rad)
-        # data_b = np.append(data_b, b_rad)
     
 gal_lon = np.linspace(0.001 , 359.999 , 1000) * u_deg
 gal_lat = np.zeros(1000) * u_deg
