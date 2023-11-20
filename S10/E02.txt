@@ -1,0 +1,16 @@
+#
+# basic information of Mars
+#
+# format of this file
+#
+#  1st column      : property
+#  2nd column      : value
+#  additional data : unit and/or note
+#
+mass               6.417E+23    # kg
+radius                3389.5    # km
+magnitude              -2.94    # mag, at the brighest
+orbital_period       686.980    # day
+rotation_period     1.025957    # day
+density               3.9335    # g/cc
+escape_velocity        5.027    # km/sec
