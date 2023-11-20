@@ -10,21 +10,19 @@ db_file = "./Astro/S06/GLARE.db"
 if os.path.isfile("./Astro/S06/data.txt") == False:
     with open("./Astro/S06/data.txt","w") as f:
         f.write(str(requests.get("http://glade.elte.hu/GLADE_2.4.txt").content)[2:])
-
-
-with open("./Astro/S06/data.txt","r") as f:
-    lines = f.readline()
+        lines = f.readline()
+else:
+    with open("./Astro/S06/data.txt","r") as f:
+        lines = f.readline()
 lines = lines.split("\\n")
 
 
 sql_maketable = f"create table GLARE(gnumber integer primary key, npgc integer, gwgc_name text, leda_name text, mass_name text, wise_name text, sdss_name text, flag text, ra real, dec real, b real, b_err real, b_flag integer, b_abs real, j real, j_err real, h real, h_err real, k real, k_err real, w1 real, w1_err real, w2 real, w2_err real, w1_flag integer, b_j real, b_j_err real, z_helio real, z_cmb real, z_flag integer, v_err real, z_err real, d_l real, d_l_err real, dist_flag integer, mstar real, mstar_err real, mstar_flag integer, merger_rate real, mereger_rate_err real)"
 with contextlib.closing(sqlite3.connect(db_file)) as conn :
     cursor = conn.cursor()
-    try:
+    if os.path.isfile("./Astro/S06/GLARE.db") == False:
         cursor.execute(sql_maketable) 
-    except:
-        print("table already existing")
-
+    
     for line in lines:
         line = line.split()
         try:
@@ -193,13 +191,9 @@ with contextlib.closing(sqlite3.connect(db_file)) as conn :
             merger_rate_err = 9999999999999999.99
         
         sql_adddata = f"insert into GLARE values({gnumber},{npgc},'{gwgc_name}','{leda_name}','{mass_name}','{wise_name}','{sdss_name}','{flag}',{ra},{dec},{b},{b_err},{b_flag},{b_abs},{j},{j_err},{h},{h_err},{k},{k_err},{w1},{w1_err},{w2},{w2_err},{w1_flag},{b_j},{b_j_err},{z_helio},{z_cmb},{z_flag},{v_err},{z_err},{d_l},{d_l_err},{dist_flag},{mstar},{mstar_err},{mstar_flag},{merger_rate},{merger_rate_err})"
+
         cursor.execute(sql_adddata)
 
-
-    sql_query = "select * from GLARE where merger_rate > 2;"
-    cursor.execute(sql_query)
-    result = cursor.fetchall()
-    print(result[:5])
     conn.commit()
         
         
