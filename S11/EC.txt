@@ -1,0 +1,19 @@
+#
+# data file name : q10c.data
+#
+#  description of columns of this data file
+#
+#   1st column : item name
+#   2nd column : unit price
+#   3rd column : quantity
+#
+beaf        200     3
+chicken      80     5
+duck        100     2
+goose       125     6
+pork        150     4
+milk         90     3
+egg         110     1
+butter       50     2
+yogurt      120     4
+cheese      130     3

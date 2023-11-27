@@ -6,6 +6,8 @@ import matplotlib.backends.backend_agg as back
 with open("./Astro/S10/EA.txt","r") as f:
     lines = f.readlines()
 
+
+
 lines = lines[111:]
 dist = []
 vel = []
