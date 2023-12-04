@@ -1,0 +1,16 @@
+#
+# basic information of Saturn
+#
+# format of this file
+#
+#  1st column      : property
+#  2nd column      : value
+#  additional data : unit and/or note
+#
+mass              5.6834E+26    # kg
+radius                 58232    # km
+magnitude              -0.55    # mag, at the brighest
+orbital_period      10755.70    # day
+rotation_period      10.5433    # hr
+density                0.687    # g/cc
+escape_velocity         35.5    # km/sec

@@ -1,0 +1,10 @@
+beaf,200,3
+chicken,80,5
+duck,100,2
+goose,125,6
+pork,150,4
+milk,90,3
+egg,110,1
+butter,50,2
+yogurt,120,4
+cheese,130,3
