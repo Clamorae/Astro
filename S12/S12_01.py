@@ -80,5 +80,7 @@ ax.set_ylabel ('Apparent Magnitude [mag]')
 
 ax.invert_yaxis ()
 ax.errorbar (data_phase, data_mag, yerr=data_err, linestyle='None', marker='o', markersize=5, color='green', ecolor='black', capsize=5, label='folded lightcurve')
+data_phase = np.array(data_phase)
+ax.errorbar (data_phase + 1, data_mag, yerr=data_err, linestyle='None', marker='o', markersize=5, color='green', ecolor='black', capsize=5)
 
 fig.savefig(f"./S12/S12_01_error.png", dpi=150)
