@@ -23,7 +23,7 @@ if not os.path.isfile("./S13/optical.fits") or not os.path.isfile("./S13/IR.fits
     RA = query_result['RA']
     Dec = query_result['DEC']
 
-    coordinates = coord.SkyCoord(RA[0], Dec[0], unit=(units.deg, units.deg))
+    coordinates = coord.SkyCoord(RA[0], Dec[0], unit=(units.hour, units.deg))
     image = skyview.SkyView.get_images(position=coordinates, survey="SDSSr",pixels=1024)
     astropy.io.fits.writeto("./S13/optical.fits",image[0][0].data,overwrite=True)
 
@@ -124,37 +124,37 @@ list_matched_2_aligned = astroalign.matrix_transform (list_matched_2, transf.par
 
 # ------------------------------ STAR ALIGNEMENT ----------------------------- #
 
-(header1, image1) = read_fits(f"./S13/optical.fits")
-(header2, image2) = read_fits("./S13/IR.fits")
+# (header1, image1) = read_fits(f"./S13/optical.fits")
+# (header2, image2) = read_fits("./S13/IR.fits")
 
-image1 = image1.byteswap ().newbyteorder ()
-image2 = image2.byteswap ().newbyteorder ()
-# aligning 2nd image to 1st image
-st = coord.skimage.transform.SimilarityTransform (scale=transf.scale, rotation=transf.rotation, translation=transf.translation)
-image2_aligned = coord.skimage.transform.warp (image2, st.inverse)
-# marker and colour names for matplotlib
-markers = ['o', 'v', '^', 's', 'p', 'h', '8']
-colours = ['maroon', 'red', 'coral', 'bisque', 'orange', 'wheat', 'yellow', 'green', 'lime', 'aqua', 'skyblue', 'blue', 'indigo', 'violet', 'pink']
-# making objects "fig" and "ax"
-fig = matplotlib.figure.Figure ()
-matplotlib.backends.backend_agg.FigureCanvasAgg (fig)
-ax1 = fig.add_subplot (121)
-ax2 = fig.add_subplot (122)
-# plotting first image
-norm1 = astropy.visualization.mpl_normalize.ImageNormalize ( stretch=astropy.visualization.HistEqStretch (image1) )
-im1 = ax1.imshow (image1, origin='lower', cmap='bone', norm=norm1)
-for i in range ( len (list_matched_1) ):
-    i_marker = i % len (markers)
-    i_colour = i % len (colours)
-    ax1.plot (list_matched_1[i][0], list_matched_1[i][1], marker=markers[i_marker], color=colours[i_colour], markersize=8, fillstyle='none')
-ax1.set_title ('First Image')
-# plotting second image
-norm2 = astropy.visualization.mpl_normalize.ImageNormalize ( stretch=astropy.visualization.HistEqStretch (image2_aligned) )
-im2 = ax2.imshow (image2_aligned, origin='lower', cmap='bone', norm=norm2)
-for i in range ( len (list_matched_2_aligned) ):
-    i_marker = i % len (markers)
-    i_colour = i % len (colours)
-    ax2.plot (list_matched_2_aligned[i][0], list_matched_2_aligned[i][1], marker=markers[i_marker], color=colours[i_colour], markersize=8, fillstyle='none')
-ax2.set_title ('Second Image')
-fig.tight_layout ()
-fig.savefig ("./S13/final.png", dpi=150)
+# image1 = image1.byteswap ().newbyteorder ()
+# image2 = image2.byteswap ().newbyteorder ()
+# # aligning 2nd image to 1st image
+# st = coord.skimage.transform.SimilarityTransform (scale=transf.scale, rotation=transf.rotation, translation=transf.translation)
+# image2_aligned = coord.skimage.transform.warp (image2, st.inverse)
+# # marker and colour names for matplotlib
+# markers = ['o', 'v', '^', 's', 'p', 'h', '8']
+# colours = ['maroon', 'red', 'coral', 'bisque', 'orange', 'wheat', 'yellow', 'green', 'lime', 'aqua', 'skyblue', 'blue', 'indigo', 'violet', 'pink']
+# # making objects "fig" and "ax"
+# fig = matplotlib.figure.Figure ()
+# matplotlib.backends.backend_agg.FigureCanvasAgg (fig)
+# ax1 = fig.add_subplot (121)
+# ax2 = fig.add_subplot (122)
+# # plotting first image
+# norm1 = astropy.visualization.mpl_normalize.ImageNormalize ( stretch=astropy.visualization.HistEqStretch (image1) )
+# im1 = ax1.imshow (image1, origin='lower', cmap='bone', norm=norm1)
+# for i in range ( len (list_matched_1) ):
+#     i_marker = i % len (markers)
+#     i_colour = i % len (colours)
+#     ax1.plot (list_matched_1[i][0], list_matched_1[i][1], marker=markers[i_marker], color=colours[i_colour], markersize=8, fillstyle='none')
+# ax1.set_title ('First Image')
+# # plotting second image
+# norm2 = astropy.visualization.mpl_normalize.ImageNormalize ( stretch=astropy.visualization.HistEqStretch (image2_aligned) )
+# im2 = ax2.imshow (image2_aligned, origin='lower', cmap='bone', norm=norm2)
+# for i in range ( len (list_matched_2_aligned) ):
+#     i_marker = i % len (markers)
+#     i_colour = i % len (colours)
+#     ax2.plot (list_matched_2_aligned[i][0], list_matched_2_aligned[i][1], marker=markers[i_marker], color=colours[i_colour], markersize=8, fillstyle='none')
+# ax2.set_title ('Second Image')
+# fig.tight_layout ()
+# fig.savefig ("./S13/final.png", dpi=150)
