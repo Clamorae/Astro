@@ -65,9 +65,7 @@ ax = fig.add_subplot(111)
 inspect.DecisionBoundaryDisplay.from_estimator(classifier, train_x, response_method='predict', ax=ax, alpha=0.3, cmap='coolwarm')
 
 prediction = classifier.predict(test_x)
-# results of classification
 for i in range (len (prediction)):
-# data
     subclass = prediction[i]
     match subclass:
         case "M":
