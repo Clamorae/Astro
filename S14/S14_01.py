@@ -23,6 +23,8 @@ sim = rebound.Simulation()
 
 sim.add(m=2.063)
 sim.add(m=1.018, a = 7.4957, e = 0.59142)
+sim.add(m=125,a=120,e=0.99)
+sim.add(m=58,a= 90, e=0.9)
 
 sim.save_to_file('Sirius.bin')
 
@@ -49,6 +51,12 @@ if not os.path.isfile("./S14/S14_graph000.png"):
         star2_x = part[1].x
         star2_y = part[1].y
         star2_z = part[1].z
+        star3_x = part[2].x
+        star3_y = part[2].y
+        star3_z = part[2].z
+        star4_x = part[3].x
+        star4_y = part[3].y
+        star4_z = part[3].z
 
         file_fig = f"./S14/S14_graph{i:03d}.png"
 
@@ -65,17 +73,19 @@ if not os.path.isfile("./S14/S14_graph000.png"):
         ax.yaxis.set_pane_color ((0.0, 0.0, 0.0, 0.0))
         ax.zaxis.set_pane_color ((0.0, 0.0, 0.0, 0.0))
 
-        ax.set_xlim(-15, +5)
-        ax.set_ylim(-10, +5)
-        ax.set_zlim(-5, +5)
+        ax.set_xlim(-25, +25)
+        ax.set_ylim(-25, +25)
+        ax.set_zlim(-25, +25)
         ax.set_aspect('equal')
 
         siriusA = make_sphere(star1_x, star1_y, star1_z, 0.5, "orange")
         siriusB = make_sphere(star2_x, star2_y, star2_z, 0.2, "aquamarine")
+        siriusC = make_sphere(star3_x, star3_y, star3_z, 1, "green")
+        siriusD = make_sphere(star4_x, star4_y, star4_z, 0.8, "yellow")
 
         fig.savefig(file_fig, dpi=225)
         plt.close(fig)
 
 # -------------------------- CREATE VIDEO FROM IMAGE ------------------------- #
-command = "ffmpeg -framerate 30 -pattern_type glob -i './S14/*.png' ./S14/real_sirius.mp4"
-os.system(command)
+# command = "ffmpeg -framerate 30 -pattern_type glob -i './S14/*.png' ./S14/real_sirius.mp4"
+# os.system(command)
